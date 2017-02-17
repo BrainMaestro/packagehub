@@ -1,4 +1,10 @@
-var readme = document.querySelector('.markdown-body.entry-content');
-var dependencies = document.createElement('div');
+window.packageConfig.forEach(function (config) {
+  var details = getFileDetails(config.file);
+  if (! details) return;
 
-readme.appendChild(dependencies);
+  window.parse(details.href, config);
+});
+
+function getFileDetails(file) {
+  return document.querySelector('.files [title="' + file + '"]');
+}
