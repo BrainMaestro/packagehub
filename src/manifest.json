@@ -1,0 +1,14 @@
+{
+  "name": "Package Hub",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Display dependencies for many package managers on GitHub",
+  "author": "Ezinwa Okpoechi",
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["index.js"]
+    }
+  ]
+
+}
