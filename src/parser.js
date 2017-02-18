@@ -5,8 +5,9 @@ function parse(url, config, callback) {
     var parseFormat = getParser(config.format);
     var packageData = parseFormat(text);
 
-    // dependencies and dev-dependencies
-    callback(packageData[config.keys[0]], packageData[config.keys[1]]);
+    var deps = packageData[config.keys[0]];
+    var devDeps = packageData[config.keys[1]];
+    callback(deps, devDeps, config.name);
   }
 }
 

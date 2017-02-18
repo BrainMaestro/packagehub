@@ -8,6 +8,7 @@
     {
       "matches": ["https://github.com/*"],
       "js": [
+        "display.js",
         "parser.js",
         "config.js",
         "index.js"
