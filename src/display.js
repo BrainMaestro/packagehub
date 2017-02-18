@@ -2,15 +2,19 @@ var tableHeaders = ['Name', 'Version', 'Latest', 'Description'];
 
 function display(deps, devDeps, config) {
   var readme = document.querySelector('.markdown-body.entry-content');
+  var license = document.querySelector('#user-content-license');
+  if (license) {
+    license = license.parentNode;
+  }
 
   if (! isEmpty(deps)) {
-    readme.appendChild(addHeader('Dependencies (' + config.name + ')'));
-    readme.appendChild(addDependencyTable(deps, config.registry));
+    readme.insertBefore(addHeader('Dependencies (' + config.name + ')'), license);
+    readme.insertBefore(addDependencyTable(deps, config.registry), license);
   }
 
   if (! isEmpty(devDeps)) {
-    readme.appendChild(addHeader('Dev Dependencies'));
-    readme.appendChild(addDependencyTable(devDeps, config.registry));
+    readme.insertBefore(addHeader('Dev Dependencies'), license);
+    readme.insertBefore(addDependencyTable(devDeps, config.registry), license);
   }
 }
 
