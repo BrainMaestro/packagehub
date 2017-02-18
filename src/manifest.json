@@ -8,6 +8,7 @@
     {
       "matches": ["https://github.com/*"],
       "js": [
+        "registry.js",
         "display.js",
         "parser.js",
         "config.js",
@@ -17,5 +18,11 @@
   ],
   "permissions": [
     "https://registry.npmjs.org/"
-  ]
+  ],
+  "background": {
+    "scripts": [
+      "registry.js"
+    ],
+    "persistent": false
+  }
 }

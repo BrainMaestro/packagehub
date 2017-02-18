@@ -1,16 +1,16 @@
-var tableHeaders = ['Name', 'Version'];
+var tableHeaders = ['Name', 'Version', 'Latest', 'Description'];
 
-function display(deps, devDeps, name) {
+function display(deps, devDeps, configName, registry) {
   var readme = document.querySelector('.markdown-body.entry-content');
 
   if (! isEmpty(deps)) {
-    readme.appendChild(addHeader('Dependencies (' + name + ')'));
-    readme.appendChild(createDependencyTable(deps));
+    readme.appendChild(addHeader('Dependencies (' + configName + ')'));
+    readme.appendChild(createDependencyTable(deps, configName, registry));
   }
 
   if (! isEmpty(devDeps)) {
     readme.appendChild(addHeader('Dev Dependencies'));
-    readme.appendChild(createDependencyTable(devDeps));
+    readme.appendChild(createDependencyTable(devDeps, configName, registry));
   }
 }
 
@@ -21,7 +21,7 @@ function addHeader(text) {
   return header;
 }
 
-function createDependencyTable(deps) {
+function createDependencyTable(deps, configName, registry) {
   var table = document.createElement('table');
   tableHeaders.forEach(addTableHeader);
 
@@ -32,7 +32,18 @@ function createDependencyTable(deps) {
     var row = document.createElement('tr');
     row.appendChild(getName(dep));
     row.appendChild(getVersion(deps[dep]));
+    window.registry.get(configName, registry, dep, addExtraData.bind(row));
     body.appendChild(row);
+
+    function addExtraData(latestVersion, description, homepage) {
+      var td = document.createElement('td');
+      td.textContent = latestVersion;
+      this.appendChild(td);
+
+      td = document.createElement('td');
+      td.textContent = description;
+      this.appendChild(td);
+    }
   }
 
   return table;

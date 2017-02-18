@@ -7,17 +7,17 @@ function parse(url, config, callback) {
 
     var deps = packageData[config.keys[0]];
     var devDeps = packageData[config.keys[1]];
-    callback(deps, devDeps, config.name);
+    callback(deps, devDeps, config.name, config.registry);
   }
 }
 
 function getPackageData(url, callback) {
   var xhr = new XMLHttpRequest();
-  xhr.addEventListener("load", reqListener);
+  xhr.addEventListener("load", listener);
   xhr.open("GET", url);
   xhr.send();
 
-  function reqListener() {
+  function listener() {
     var parser = new DOMParser();
     var doc = parser.parseFromString(this.responseText, 'text/html');
     var blob = doc.querySelector('.blob-wrapper');
