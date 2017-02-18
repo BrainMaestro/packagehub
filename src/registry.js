@@ -1,9 +1,13 @@
-function npm(registry, packageName, callback) {
-  var url = registry + packageName + '/latest';
+function getExtraPackageData(url, listener) {
   var xhr = new XMLHttpRequest();
   xhr.addEventListener("load", listener);
   xhr.open("GET", url);
   xhr.send();
+}
+
+function npm(packageName, callback) {
+  var url = registryConfig.npm + packageName + '/latest';
+  getExtraPackageData(url, listener);
 
   function listener() {
     var data = JSON.parse(this.responseText);
@@ -11,17 +15,10 @@ function npm(registry, packageName, callback) {
   }
 }
 
-function get(configName, registry, packageName, callback) {
-  switch (configName) {
-    case 'npm':
-      return npm(registry, packageName, callback);
-  }
-}
-
-function request(url) {
-
-}
+var registryConfig = {
+  npm: 'https://registry.npmjs.org/',
+};
 
 window.registry = {
-  get: get,
+  npm: npm,
 };

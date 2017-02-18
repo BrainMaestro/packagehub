@@ -2,7 +2,7 @@ window.packageConfig = [
   {
     name: 'npm',
     file: 'package.json',
-    registry: 'https://registry.npmjs.org/',
+    registry: window.registry.npm,
     parse: window.parser.json,
     keys: ['dependencies', 'devDependencies']
   },

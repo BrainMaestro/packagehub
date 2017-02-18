@@ -6,7 +6,7 @@ function parse(url, config, callback) {
 
     var deps = packageData[config.keys[0]];
     var devDeps = packageData[config.keys[1]];
-    callback(deps, devDeps, config.name, config.registry);
+    callback(deps, devDeps, config);
   }
 }
 
