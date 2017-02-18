@@ -4,6 +4,13 @@ window.packageConfig = [
     file: 'package.json',
     registry: window.registry.npm,
     parse: window.parser.json,
-    keys: ['dependencies', 'devDependencies']
+    keys: ['dependencies', 'devDependencies'],
+  },
+  {
+    name: 'composer',
+    file: 'composer.json',
+    registry: window.registry.composer,
+    parse: window.parser.json,
+    keys: ['require', 'require-dev'],
   },
 ];

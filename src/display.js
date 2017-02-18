@@ -26,7 +26,9 @@ function display(deps, devDeps, config) {
 }
 
 function addDependencies(body, deps, registry, dev) {
-  body.appendChild(subHeader(dev))
+  if (deps) {
+    body.appendChild(subHeader(dev))
+  }
 
   for (dep in deps) {
     var row = document.createElement('tr');
@@ -42,7 +44,7 @@ function subHeader(dev) {
   var row = document.createElement('tr');
   var td = document.createElement('td');
   var header = document.createElement('strong');
-  
+
   header.textContent = dev ? 'Development Dependencies' : 'Project Dependencies';
   td.colSpan = tableHeaders.length;
   td.appendChild(header);

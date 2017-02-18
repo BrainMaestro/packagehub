@@ -15,10 +15,22 @@ function npm(packageName, callback) {
   }
 }
 
+function composer(packageName, callback) {
+  var url = registryConfig.composer + packageName;
+  getExtraPackageData(url, listener);
+
+  function listener() {
+    var data = JSON.parse(this.responseText)['results'][0];
+    callback('-', data.description, data.repository);
+  }
+}
+
 var registryConfig = {
   npm: 'https://registry.npmjs.org/',
+  composer: 'https://packagist.org/search.json?q=',
 };
 
 window.registry = {
   npm: npm,
+  composer: composer,
 };
