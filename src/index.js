@@ -1,10 +1,9 @@
-window.packageConfig.forEach(function (config) {
-  var details = getFileDetails(config.file);
-  if (! details) return;
+window.packageConfig.forEach(showDependencies);
 
-  window.parse(details.href, config, window.display);
-});
+function showDependencies(config) {
+  var file = document.querySelector('.files [title="' + config.file + '"]');
+  if (! file) return;
 
-function getFileDetails(file) {
-  return document.querySelector('.files [title="' + file + '"]');
+  var link = file.href;
+  window.parse(link, config, window.display);
 }

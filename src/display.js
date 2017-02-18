@@ -5,12 +5,12 @@ function display(deps, devDeps, config) {
 
   if (! isEmpty(deps)) {
     readme.appendChild(addHeader('Dependencies (' + config.name + ')'));
-    readme.appendChild(createDependencyTable(deps, config.registry));
+    readme.appendChild(addDependencyTable(deps, config.registry));
   }
 
   if (! isEmpty(devDeps)) {
     readme.appendChild(addHeader('Dev Dependencies'));
-    readme.appendChild(createDependencyTable(devDeps, config.registry));
+    readme.appendChild(addDependencyTable(devDeps, config.registry));
   }
 }
 
@@ -21,7 +21,7 @@ function addHeader(text) {
   return header;
 }
 
-function createDependencyTable(deps, registry) {
+function addDependencyTable(deps, registry) {
   var table = document.createElement('table');
   tableHeaders.forEach(addTableHeader);
 
@@ -30,20 +30,15 @@ function createDependencyTable(deps, registry) {
 
   for (dep in deps) {
     var row = document.createElement('tr');
-    row.appendChild(getName(dep));
-    row.appendChild(getVersion(deps[dep]));
+    row.appendChild(textData(dep));
+    row.appendChild(versionData(deps[dep]));
     body.appendChild(row);
 
     registry(dep, addExtraData.bind(row));
 
     function addExtraData(latestVersion, description, homepage) {
-      var td = document.createElement('td');
-      td.textContent = latestVersion;
-      this.appendChild(td);
-
-      td = document.createElement('td');
-      td.textContent = description;
-      this.appendChild(td);
+      this.appendChild(versionData(latestVersion, homepage));
+      this.appendChild(textData(description));
     }
   }
 
@@ -56,17 +51,26 @@ function createDependencyTable(deps, registry) {
   }
 }
 
-function getName(name) {
+function textData(text) {
   var td = document.createElement('td');
-  td.textContent = name;
+  td.textContent = text;
 
   return td;
 }
 
-function getVersion(version) {
+function versionData(version, link) {
   var td = document.createElement('td');
   var code = document.createElement('code');
-  code.textContent = version;
+
+  if (link) {
+    var anchor = document.createElement('a');
+    anchor.textContent = version;
+    anchor.setAttribute('href', link);
+    code.appendChild(anchor);
+  } else {
+    code.textContent = version;
+  }
+
   td.appendChild(code);
 
   return td;
