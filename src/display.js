@@ -3,34 +3,30 @@ var tableHeaders = ['Name', 'Version', 'Latest', 'Description'];
 function display(deps, devDeps, config) {
   var readme = document.querySelector('.markdown-body.entry-content');
   var license = document.querySelector('#user-content-license');
-  if (license) {
-    license = license.parentNode;
-  }
+  license = license ? license.parentNode : null;
 
-  if (! isEmpty(deps)) {
-    readme.insertBefore(addHeader('Dependencies (' + config.name + ')'), license);
-    readme.insertBefore(addDependencyTable(deps, config.registry), license);
-  }
-
-  if (! isEmpty(devDeps)) {
-    readme.insertBefore(addHeader('Dev Dependencies'), license);
-    readme.insertBefore(addDependencyTable(devDeps, config.registry), license);
-  }
-}
-
-function addHeader(text) {
   var header = document.createElement('h2');
-  header.textContent = text;
+  header.textContent = 'Dependencies (' + config.name + ')';
+  readme.insertBefore(header, license);
 
-  return header;
-}
-
-function addDependencyTable(deps, registry) {
   var table = document.createElement('table');
   tableHeaders.forEach(addTableHeader);
-
   var body = document.createElement('tbody');
   table.appendChild(body);
+
+  addDependencies(body, deps, config.registry);
+  addDependencies(body, devDeps, config.registry, true);
+  readme.insertBefore(table, license);
+
+  function addTableHeader(header) {
+    var tableHeader = document.createElement('th');
+    tableHeader.textContent = header;
+    table.appendChild(tableHeader);
+  }
+}
+
+function addDependencies(body, deps, registry, dev) {
+  body.appendChild(subHeader(dev))
 
   for (dep in deps) {
     var row = document.createElement('tr');
@@ -39,20 +35,19 @@ function addDependencyTable(deps, registry) {
     body.appendChild(row);
 
     registry(dep, addExtraData.bind(row));
-
-    function addExtraData(latestVersion, description, homepage) {
-      this.appendChild(versionData(latestVersion, homepage));
-      this.appendChild(textData(description));
-    }
   }
+}
 
-  return table;
+function subHeader(dev) {
+  var row = document.createElement('tr');
+  var td = document.createElement('td');
+  var header = document.createElement('strong');
+  td.colSpan = tableHeaders.length;
+  header.textContent = dev ? 'Development Dependencies' : 'Project Dependencies';
+  td.appendChild(header);
+  row.appendChild(td);
 
-  function addTableHeader(header) {
-    var tableHeader = document.createElement('th');
-    tableHeader.textContent = header;
-    table.appendChild(tableHeader);
-  }
+  return row;
 }
 
 function textData(text) {
@@ -80,12 +75,9 @@ function versionData(version, link) {
   return td;
 }
 
-function isEmpty(obj) {
-  for (name in obj) {
-    return false;
-  }
-
-  return true;
+function addExtraData(latestVersion, description, homepage) {
+  this.appendChild(versionData(latestVersion, homepage));
+  this.appendChild(textData(description));
 }
 
 window.display = display;
