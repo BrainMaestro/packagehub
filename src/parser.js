@@ -2,8 +2,7 @@ function parse(url, config, callback) {
   getPackageData(url, getDependencies);
 
   function getDependencies(text) {
-    var parseFormat = getParser(config.format);
-    var packageData = parseFormat(text);
+    var packageData = config.parse(text);
 
     var deps = packageData[config.keys[0]];
     var devDeps = packageData[config.keys[1]];
@@ -26,16 +25,11 @@ function getPackageData(url, callback) {
   }
 }
 
-function getParser(format) {
-  switch (format) {
-    case 'json':
-    default:
-      return parseJSON;
-  }
-}
-
-function parseJSON(text) {
+function json(text) {
   return JSON.parse(text);
 }
 
 window.parse = parse;
+window.parser = {
+  json: json,
+};
