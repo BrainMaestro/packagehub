@@ -11,6 +11,8 @@ function display(deps, devDeps, config) {
   addDependencies(body, devDeps, config.registry, true);
 
   header.textContent = 'Dependencies (' + config.name + ')';
+  header.style.display = 'none';
+  table.style.display = 'none';
   tableHeaders.forEach(addTableHeader);
   table.appendChild(body);
 
@@ -30,13 +32,15 @@ function addDependencies(body, deps, registry, dev) {
     body.appendChild(subHeader(dev))
   }
 
-  for (dep in deps) {
+  for (depName in deps) {
     var row = document.createElement('tr');
-    row.appendChild(textData(dep));
-    row.appendChild(versionData(deps[dep]));
+    addName(row, depName);
+    addVersion(row, deps[depName]);
+    addVersion(row, '-');
+    row.appendChild(document.createElement('td')); // description
     body.appendChild(row);
 
-    registry(dep, addExtraData.bind(row));
+    registry(depName, addExtraData.bind(row));
   }
 }
 
@@ -53,34 +57,30 @@ function subHeader(dev) {
   return row;
 }
 
-function textData(text) {
+function addName(row, name) {
   var td = document.createElement('td');
-  td.textContent = text;
-
-  return td;
+  var anchor = document.createElement('a');
+  anchor.textContent = name;
+  td.appendChild(anchor);
+  row.appendChild(td);
 }
 
-function versionData(version, link) {
+function addVersion(row, version) {
   var td = document.createElement('td');
   var code = document.createElement('code');
-
-  if (link) {
-    var anchor = document.createElement('a');
-    anchor.textContent = version;
-    anchor.setAttribute('href', link);
-    code.appendChild(anchor);
-  } else {
-    code.textContent = version;
-  }
-
+  code.textContent = version;
   td.appendChild(code);
-
-  return td;
+  row.appendChild(td);
 }
 
 function addExtraData(latestVersion, description, homepage) {
-  this.appendChild(versionData(latestVersion, homepage));
-  this.appendChild(textData(description));
+  data = this.getElementsByTagName('td');
+  data[0].children[0].setAttribute('href', homepage);
+  data[2].children[0].textContent = latestVersion;
+  data[3].textContent = description;
+
+  this.parentNode.parentNode.style.display = 'block';
+  this.parentNode.parentNode.previousSibling.style.display = 'block';
 }
 
 window.display = display;
