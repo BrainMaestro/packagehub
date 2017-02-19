@@ -12,8 +12,8 @@ function parse(url, config, callback) {
 
 function getPackageData(url, callback) {
   var xhr = new XMLHttpRequest();
-  xhr.addEventListener("load", listener);
-  xhr.open("GET", url);
+  xhr.addEventListener('load', listener);
+  xhr.open('GET', url);
   xhr.send();
 
   function listener() {

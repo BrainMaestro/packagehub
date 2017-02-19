@@ -23,5 +23,25 @@ Also, to make it more fun, I decided to accomplish this without any fancy librar
 ## Related
 * [npmhub](https://github.com/npmhub/npmhub) - inspired the idea for this extension.
 
+## Installation
+
+[![Install from chrome web store](https://developer.chrome.com/webstore/images/ChromeWebStore_Badge_v2_340x96.png)](https://chrome.google.com/webstore/detail/package-hub/hnnjnbmjanpeoeapjllonejjgoonilal)
+
+Install extension from [Chrome Web Store](https://chrome.google.com/webstore/detail/package-hub/hnnjnbmjanpeoeapjllonejjgoonilal)
+
+## Development
+
+1. Clone this repo.
+2. Go to chrome extensions [chrome://extensions](chrome://extensions).
+3. Enable developer mode.
+4. Click on load unpacked extension and select the source folder of this cloned repo.
+
+To add support for a new package manager
+
+1. Add a new [config](src/config.js) entry with the relevant details.
+2. Add a new [parser](src/parser.js) if the package manager dependencies are not specified in JSON.
+3. Add a new [registry](src/registry.js) function to retrieve extra details of the package. This function should provide `latest-version`, `description`, and `repository` as arguments to the callback.
+
+
 ## License
 MIT © Ezinwa Okpoechi

@@ -1,7 +1,7 @@
 function getExtraPackageData(url, listener) {
   var xhr = new XMLHttpRequest();
-  xhr.addEventListener("load", listener);
-  xhr.open("GET", url);
+  xhr.addEventListener('load', listener);
+  xhr.open('GET', url);
   xhr.send();
 }
 
