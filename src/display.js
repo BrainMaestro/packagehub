@@ -75,7 +75,9 @@ function addVersion(row, version) {
 
 function addExtraData(latestVersion, description, homepage) {
   data = this.getElementsByTagName('td');
-  data[0].children[0].setAttribute('href', homepage);
+  if (homepage) {
+    data[0].children[0].setAttribute('href', homepage);
+  }
   data[2].children[0].textContent = latestVersion;
   data[3].textContent = description;
 
