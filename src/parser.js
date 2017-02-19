@@ -4,8 +4,8 @@ function parse(url, config, callback) {
   function getDependencies(text) {
     var packageData = config.parse(text);
 
-    var deps = packageData[config.keys[0]];
-    var devDeps = packageData[config.keys[1]];
+    var deps = filter(packageData[config.keys[0]], config.filter);
+    var devDeps = filter(packageData[config.keys[1]], config.filter);
     callback(deps, devDeps, config);
   }
 }
@@ -23,6 +23,16 @@ function getPackageData(url, callback) {
 
     callback(blob.textContent);
   }
+}
+
+function filter(deps, configFilter) {
+  for (name in deps) {
+    if (! configFilter.test(name)) {
+      delete deps[name];
+    }
+  }
+
+  return deps;
 }
 
 function json(text) {

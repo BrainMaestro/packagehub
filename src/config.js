@@ -5,6 +5,7 @@ window.packageConfig = [
     registry: window.registry.npm,
     parse: window.parser.json,
     keys: ['dependencies', 'devDependencies'],
+    filter: /.*/,
   },
   {
     name: 'composer',
@@ -12,5 +13,6 @@ window.packageConfig = [
     registry: window.registry.composer,
     parse: window.parser.json,
     keys: ['require', 'require-dev'],
+    filter: /.*\/.*/,
   },
 ];
