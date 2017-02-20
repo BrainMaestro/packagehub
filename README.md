@@ -5,10 +5,10 @@
 
 ### Package Manager Support
 - [x] Npm.
-- [x] Composer (incomplete).
+- [x] Composer.
+- [x] Pip.
 - [ ] Cargo.
 - [ ] Yarn.
-- [ ] Pip.
 
 ### Rationale
 Why build this? We already have [npmhub](https://github.com/npmhub/npmhub)?
@@ -42,6 +42,8 @@ To add support for a new package manager
 2. Add a new [parser](src/parser.js) if the package manager dependencies are not specified in JSON.
 3. Add a new [registry](src/registry.js) function to retrieve extra details of the package. This function should provide `latest-version`, `description`, and `repository` as arguments to the callback.
 
+### Appreciation
+Thanks to [Libraries.io](https://libraries.io/) for providing an excellent api with returns just the right amount of data to make this extension useful without being wasteful.
 
 ## License
 MIT © Ezinwa Okpoechi
