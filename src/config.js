@@ -9,7 +9,7 @@ window.packageConfig = [
   {
     name: 'composer',
     file: 'composer.json',
-    registry: window.registry.composer,
+    registry: window.registry.librariesIO.bind('packagist'),
     parse: window.parser.json,
     keys: ['require', 'require-dev'],
     filter: /.*\/.*/,
