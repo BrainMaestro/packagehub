@@ -19,6 +19,7 @@
   ],
   "permissions": [
     "https://registry.npmjs.org/",
-    "https://packagist.org/"
+    "https://packagist.org/",
+    "https://libraries.io/api/"
   ]
 }

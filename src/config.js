@@ -17,7 +17,7 @@ window.packageConfig = [
   {
     name: 'pip',
     file: 'Pipfile',
-    registry: window.registry.pip,
+    registry: window.registry.librariesIO.bind('pypi'),
     parse: window.parser.toml,
     keys: ['packages', 'dev-packages'],
   }
