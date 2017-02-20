@@ -38,9 +38,8 @@ Install extension from [Chrome Web Store](https://chrome.google.com/webstore/det
 
 To add support for a new package manager
 
-1. Add a new [config](src/config.js) entry with the relevant details.
-2. Add a new [parser](src/parser.js) if the package manager dependencies are not specified in JSON.
-3. Add a new [registry](src/registry.js) function to retrieve extra details of the package. This function should provide `latest-version`, `description`, and `repository` as arguments to the callback.
+1. Add a new [config](src/config.js) entry with the relevant details. The registry in the config should be one of the supported ones in [Libraries.io](https://libraries.io/)
+2. Add a new [parser](src/parser.js) if the package manager dependencies are not specified in one of the already existing formats (JSON, TOML, etc.).
 
 ### Appreciation
 Thanks to [Libraries.io](https://libraries.io/) for providing an excellent api with returns just the right amount of data to make this extension useful without being wasteful.
