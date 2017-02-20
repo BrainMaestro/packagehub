@@ -26,6 +26,10 @@ function getPackageData(url, callback) {
 }
 
 function filter(deps, configFilter) {
+  if (! configFilter) {
+    return deps;
+  }
+  
   for (name in deps) {
     if (! configFilter.test(name)) {
       delete deps[name];
