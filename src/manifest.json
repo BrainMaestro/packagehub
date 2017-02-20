@@ -1,6 +1,6 @@
 {
   "name": "Package Hub",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "manifest_version": 2,
   "description": "Display dependencies for many package managers on GitHub",
   "author": "Ezinwa Okpoechi",
@@ -18,8 +18,6 @@
     }
   ],
   "permissions": [
-    "https://registry.npmjs.org/",
-    "https://packagist.org/",
     "https://libraries.io/api/"
   ]
 }

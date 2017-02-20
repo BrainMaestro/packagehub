@@ -2,14 +2,14 @@ window.packageConfig = [
   {
     name: 'npm',
     file: 'package.json',
-    registry: window.registry.npm,
+    registry: 'npm',
     parse: window.parser.json,
     keys: ['dependencies', 'devDependencies'],
   },
   {
     name: 'composer',
     file: 'composer.json',
-    registry: window.registry.librariesIO.bind('packagist'),
+    registry: 'packagist',
     parse: window.parser.json,
     keys: ['require', 'require-dev'],
     filter: /.*\/.*/,
@@ -17,7 +17,7 @@ window.packageConfig = [
   {
     name: 'pip',
     file: 'Pipfile',
-    registry: window.registry.librariesIO.bind('pypi'),
+    registry: 'pypi',
     parse: window.parser.toml,
     keys: ['packages', 'dev-packages'],
   }

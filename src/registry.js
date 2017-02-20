@@ -1,24 +1,12 @@
 (function () {
-  function getExtraPackageData(url, listener) {
+  var baseUrl = 'https://libraries.io/api/';
+
+  function getExtraPackageData(registry, packageName, callback) {
+    var url = baseUrl + registry + '/' + encodeURIComponent(packageName);
     var xhr = new XMLHttpRequest();
     xhr.addEventListener('load', listener);
     xhr.open('GET', url);
     xhr.send();
-  }
-
-  function npm(packageName, callback) {
-    var url = registryConfig.npm + packageName + '/latest';
-    getExtraPackageData(url, listener);
-
-    function listener() {
-      var data = JSON.parse(this.responseText);
-      callback(data.version, data.description, data.homepage);
-    }
-  }
-
-  function librariesIO(packageName, callback) {
-    var url = registryConfig.librariesIO + this + '/' + encodeURIComponent(packageName);
-    getExtraPackageData(url, listener);
 
     function listener() {
       var data = JSON.parse(this.responseText);
@@ -26,13 +14,5 @@
     }
   }
 
-  var registryConfig = {
-    npm: 'https://registry.npmjs.org/',
-    librariesIO: 'https://libraries.io/api/',
-  };
-
-  window.registry = {
-    npm: npm,
-    librariesIO: librariesIO,
-  };
+  window.getExtraPackageData = getExtraPackageData;
 })();

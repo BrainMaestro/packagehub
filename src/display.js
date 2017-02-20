@@ -41,7 +41,7 @@
       row.appendChild(document.createElement('td')); // description
       body.appendChild(row);
 
-      registry(depName, addExtraData.bind(row));
+      window.getExtraPackageData(registry, depName, addExtraData.bind(row));
     }
   }
 
