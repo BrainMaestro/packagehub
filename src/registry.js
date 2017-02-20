@@ -26,6 +26,10 @@
     }
   }
 
+  function pip(packageName, callback) {
+    callback('-', '-');
+  }
+
   var registryConfig = {
     npm: 'https://registry.npmjs.org/',
     composer: 'https://packagist.org/search.json?q=',
@@ -34,5 +38,6 @@
   window.registry = {
     npm: npm,
     composer: composer,
+    pip: pip,
   };
 })();

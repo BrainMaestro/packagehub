@@ -19,6 +19,6 @@ window.packageConfig = [
     file: 'Pipfile',
     registry: window.registry.pip,
     parse: window.parser.toml,
-    keys: ['', ''],
+    keys: ['packages', 'dev-packages'],
   }
 ];

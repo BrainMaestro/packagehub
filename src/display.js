@@ -8,9 +8,6 @@
     var table = document.createElement('table');
     var body = document.createElement('tbody');
 
-    addDependencies(body, deps, config.registry);
-    addDependencies(body, devDeps, config.registry, true);
-
     header.textContent = 'Dependencies (' + config.name + ')';
     header.style.display = 'none';
     table.style.display = 'none';
@@ -20,6 +17,9 @@
     license = license ? license.parentNode : null;
     readme.insertBefore(header, license);
     readme.insertBefore(table, license);
+
+    addDependencies(body, deps, config.registry);
+    addDependencies(body, devDeps, config.registry, true);
 
     function addTableHeader(header) {
       var tableHeader = document.createElement('th');
@@ -81,9 +81,10 @@
     }
     data[2].children[0].textContent = latestVersion;
     data[3].textContent = description;
+    var table = this.parentNode.parentNode;
 
-    this.parentNode.parentNode.style.display = 'block';
-    this.parentNode.parentNode.previousSibling.style.display = 'block';
+    table.style.display = 'block';
+    table.previousSibling.style.display = 'block';
   }
 
   window.display = display;

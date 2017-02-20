@@ -4,7 +4,6 @@
 
     function getDependencies(text) {
       var packageData = config.parse(text);
-      console.log(packageData);
 
       var deps = filter(packageData[config.keys[0]], config.filter);
       var devDeps = filter(packageData[config.keys[1]], config.filter);
@@ -43,6 +42,11 @@
 
   function json(text) {
     return JSON.parse(text);
+  }
+
+  function toml(text) {
+    var nodes = window.toml.parse(text);
+    return window.toml.compile(nodes);
   }
 
   window.parse = parse;
