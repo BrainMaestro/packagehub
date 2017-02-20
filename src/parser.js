@@ -1,49 +1,53 @@
-function parse(url, config, callback) {
-  getPackageData(url, getDependencies);
+(function () {
+  function parse(url, config, callback) {
+    getPackageData(url, getDependencies);
 
-  function getDependencies(text) {
-    var packageData = config.parse(text);
+    function getDependencies(text) {
+      var packageData = config.parse(text);
+      console.log(packageData);
 
-    var deps = filter(packageData[config.keys[0]], config.filter);
-    var devDeps = filter(packageData[config.keys[1]], config.filter);
-    callback(deps, devDeps, config);
-  }
-}
-
-function getPackageData(url, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.addEventListener('load', listener);
-  xhr.open('GET', url);
-  xhr.send();
-
-  function listener() {
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(this.responseText, 'text/html');
-    var blob = doc.querySelector('.blob-wrapper');
-
-    callback(blob.textContent);
-  }
-}
-
-function filter(deps, configFilter) {
-  if (! configFilter) {
-    return deps;
-  }
-  
-  for (name in deps) {
-    if (! configFilter.test(name)) {
-      delete deps[name];
+      var deps = filter(packageData[config.keys[0]], config.filter);
+      var devDeps = filter(packageData[config.keys[1]], config.filter);
+      callback(deps, devDeps, config);
     }
   }
 
-  return deps;
-}
+  function getPackageData(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', listener);
+    xhr.open('GET', url);
+    xhr.send();
 
-function json(text) {
-  return JSON.parse(text);
-}
+    function listener() {
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(this.responseText, 'text/html');
+      var blob = doc.querySelector('.blob-wrapper');
 
-window.parse = parse;
-window.parser = {
-  json: json,
-};
+      callback(blob.textContent);
+    }
+  }
+
+  function filter(deps, configFilter) {
+    if (! configFilter) {
+      return deps;
+    }
+
+    for (name in deps) {
+      if (! configFilter.test(name)) {
+        delete deps[name];
+      }
+    }
+
+    return deps;
+  }
+
+  function json(text) {
+    return JSON.parse(text);
+  }
+
+  window.parse = parse;
+  window.parser = {
+    json: json,
+    toml: toml,
+  };
+})();

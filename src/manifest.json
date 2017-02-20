@@ -8,6 +8,7 @@
     {
       "matches": ["https://github.com/*"],
       "js": [
+        "lib/toml.js",
         "registry.js",
         "display.js",
         "parser.js",

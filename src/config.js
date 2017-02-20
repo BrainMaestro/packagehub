@@ -14,4 +14,11 @@ window.packageConfig = [
     keys: ['require', 'require-dev'],
     filter: /.*\/.*/,
   },
+  {
+    name: 'pip',
+    file: 'Pipfile',
+    registry: window.registry.pip,
+    parse: window.parser.toml,
+    keys: ['', ''],
+  }
 ];
