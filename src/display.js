@@ -9,6 +9,8 @@
     var body = document.createElement('tbody');
 
     header.textContent = 'Dependencies (' + config.name + ')';
+    header.title = 'Toggle ' + config.name + ' table display';
+    header.onclick = toggleTable;
     header.style.display = 'none';
     table.style.display = 'none';
     tableHeaders.forEach(addTableHeader);
@@ -25,6 +27,10 @@
       var tableHeader = document.createElement('th');
       tableHeader.textContent = header;
       table.appendChild(tableHeader);
+    }
+
+    function toggleTable() {
+      table.style.display = table.style.display == 'block' ? 'none' : 'block';
     }
   }
 
@@ -82,9 +88,11 @@
     data[2].children[0].textContent = latestVersion;
     data[3].textContent = description;
     var table = this.parentNode.parentNode;
+    var header = table.previousSibling;
 
     table.style.display = 'block';
-    table.previousSibling.style.display = 'block';
+    header.style.display = 'block';
+    header.style.cursor = 'pointer';
   }
 
   window.display = display;
