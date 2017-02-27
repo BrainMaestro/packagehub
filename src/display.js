@@ -20,8 +20,8 @@
     readme.insertBefore(header, license);
     readme.insertBefore(table, license);
 
-    addDependencies(body, deps, config.registry);
-    addDependencies(body, devDeps, config.registry, true);
+    addDependencies(body, deps, config.registry, config.name);
+    addDependencies(body, devDeps, config.registry, config.name, true);
 
     function addTableHeader(header) {
       var tableHeader = document.createElement('th');
@@ -30,17 +30,19 @@
     }
 
     function toggleTable() {
-      table.style.display = table.style.display == 'block' ? 'none' : 'block';
+      toggle(table);
     }
   }
 
-  function addDependencies(body, deps, registry, dev) {
+  function addDependencies(body, deps, registry, name, dev) {
+    var className = name + (dev ? 'dep' : 'devDep');
     if (deps) {
-      body.appendChild(subHeader(dev))
+      body.appendChild(subHeader(dev, className))
     }
 
     for (depName in deps) {
       var row = document.createElement('tr');
+      row.className = className;
       addName(row, depName);
       addVersion(row, deps[depName]);
       addVersion(row, '-');
@@ -51,17 +53,26 @@
     }
   }
 
-  function subHeader(dev) {
+  function subHeader(dev, className) {
     var row = document.createElement('tr');
     var td = document.createElement('td');
     var header = document.createElement('strong');
 
     header.textContent = dev ? 'Development Dependencies' : 'Project Dependencies';
     td.colSpan = tableHeaders.length;
+    row.style.cursor = 'pointer';
+    row.onclick = toggleDependencies;
     td.appendChild(header);
     row.appendChild(td);
 
     return row;
+
+    function toggleDependencies() {
+      var rows = document.getElementsByClassName(className);
+      for (var i = 0; i < rows.length; i++) {
+        toggle(rows[i]);
+      }
+    }
   }
 
   function addName(row, name) {
@@ -90,9 +101,13 @@
     var table = this.parentNode.parentNode;
     var header = table.previousSibling;
 
-    table.style.display = 'block';
-    header.style.display = 'block';
+    table.style.display = '';
+    header.style.display = '';
     header.style.cursor = 'pointer';
+  }
+
+  function toggle(element) {
+    element.style.display = element.style.display === 'none' ? '' : 'none';
   }
 
   window.display = display;
