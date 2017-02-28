@@ -1,4 +1,5 @@
 # Package Hub
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/hnnjnbmjanpeoeapjllonejjgoonilal.svg?style=flat-square)]()
 > An extension for displaying dependencies for different package managers on GitHub
 
 ![](screenshot.png)
