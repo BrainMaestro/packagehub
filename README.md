@@ -5,11 +5,11 @@
 ![](screenshot.png)
 
 ### Package Manager Support
-- [x] Npm.
+- [x] Npm/Yarn.
 - [x] Composer.
 - [x] Pip.
-- [ ] Cargo.
-- [ ] Yarn.
+- [x] Cargo.
+- [ ] Gem
 
 ### Rationale
 Why build this? We already have [npmhub](https://github.com/npmhub/npmhub)?
