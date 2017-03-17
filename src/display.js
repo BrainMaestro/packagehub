@@ -86,6 +86,9 @@
   function addVersion(row, version) {
     var td = document.createElement('td');
     var code = document.createElement('code');
+    if (typeof version === 'object') {
+      version = version.version || version.path || '-';
+    }
     code.textContent = version;
     td.appendChild(code);
     row.appendChild(td);

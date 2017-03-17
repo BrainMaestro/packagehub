@@ -1,15 +1,15 @@
 # Package Hub
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/hnnjnbmjanpeoeapjllonejjgoonilal.svg?style=flat-square)]()
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/hnnjnbmjanpeoeapjllonejjgoonilal.svg?style=flat-square)](https://chrome.google.com/webstore/detail/package-hub/hnnjnbmjanpeoeapjllonejjgoonilal)
 > An extension for displaying dependencies for different package managers on GitHub
 
 ![](screenshot.png)
 
 ### Package Manager Support
-- [x] Npm.
+- [x] Npm/Yarn.
 - [x] Composer.
 - [x] Pip.
-- [ ] Cargo.
-- [ ] Yarn.
+- [x] Cargo.
+- [ ] Gem
 
 ### Rationale
 Why build this? We already have [npmhub](https://github.com/npmhub/npmhub)?

@@ -20,5 +20,12 @@ window.packageConfig = [
     registry: 'pypi',
     parse: window.parser.toml,
     keys: ['packages', 'dev-packages'],
+  },
+  {
+    name: 'cargo',
+    file: 'Cargo.toml',
+    registry: 'cargo',
+    parse: window.parser.toml,
+    keys: ['dependencies', 'dev-dependencies'],
   }
 ];
