@@ -1,5 +1,16 @@
 (function () {
   var tableHeaders = ['Name', 'Version', 'Latest', 'Description'];
+  var open = '\
+    <svg class="octicon octicon-chevron-down" viewBox="0 0 10 16" version="1.1" width="15" height="26" aria-hidden="true">\
+      <path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z">\
+      </path>\
+    </svg>';
+  var closed = '\
+    <svg class="octicon octicon-chevron-right" viewBox="0 0 8 16" version="1.1" width="12" height="24" aria-hidden="true">\
+      <path fill-rule="evenodd" d="M7.5 8l-5 5L1 11.5 4.75 8 1 4.5 2.5 3z">\
+      </path>\
+    </svg>';
+
 
   function display(deps, devDeps, config) {
     var readme = document.querySelector('.markdown-body.entry-content');
@@ -57,12 +68,16 @@
     var row = document.createElement('tr');
     var td = document.createElement('td');
     var header = document.createElement('strong');
-
+    
     header.textContent = dev ? 'Development Dependencies' : 'Project Dependencies';
     td.colSpan = tableHeaders.length;
     row.style.cursor = 'pointer';
     row.onclick = toggleDependencies;
     td.appendChild(header);
+    var icon = document.createElement('div');
+    icon.style.float = 'right';
+    icon.innerHTML = open;
+    td.appendChild(icon);
     row.appendChild(td);
 
     return row;
@@ -72,6 +87,8 @@
       for (var i = 0; i < rows.length; i++) {
         toggle(rows[i]);
       }
+      var icon = td.getElementsByTagName('div')[0];
+      icon.innerHTML = icon.innerHTML === open ? closed : open;
     }
   }
 
