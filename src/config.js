@@ -27,5 +27,5 @@ window.packageConfig = [
     registry: 'cargo',
     parse: window.parser.toml,
     keys: ['dependencies', 'dev-dependencies'],
-  }
-];
+  },
+]
