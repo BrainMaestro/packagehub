@@ -39,3 +39,5 @@ jspm_packages
 *.crx
 *.pem
 *.zip
+
+.DS_Store
