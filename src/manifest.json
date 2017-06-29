@@ -4,11 +4,10 @@
   "manifest_version": 2,
   "description": "Display dependencies for many package managers on GitHub",
   "author": "Ezinwa Okpoechi",
+  "homepage_url": "https://github.com/BrainMaestro/packagehub",
   "content_scripts": [
     {
-      "matches": [
-        "https://github.com/*"
-      ],
+      "matches": ["https://github.com/*"],
       "js": [
         "lib/toml.js",
         "registry.js",
@@ -19,7 +18,10 @@
       ]
     }
   ],
-  "permissions": [
-    "https://libraries.io/api/"
-  ]
+  "permissions": ["https://libraries.io/api/", "storage"],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Package Hub",
+    "default_popup": "popup/set_api_key.html"
+  }
 }
