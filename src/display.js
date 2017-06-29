@@ -52,6 +52,12 @@
       body.appendChild(subHeader(dev, className))
     }
 
+    var dependencies = []
+    for (depName in deps) {
+      dependencies.push({ name: depName, platform: registry })
+    }
+
+    var rows = {}
     for (depName in deps) {
       var row = document.createElement('tr')
       row.className = className
@@ -60,9 +66,41 @@
       addVersion(row, '-')
       row.appendChild(document.createElement('td')) // description
       body.appendChild(row)
-
-      window.getExtraPackageData(registry, depName, addExtraData.bind(row))
+      rows[depName] = row
     }
+
+    chrome.storage.local.get('key', function(results) {
+      if (!results.key) {
+        for (depName in deps) {
+          window.getExtraPackageData(
+            registry,
+            depName,
+            addExtraData.bind(rows[depName])
+          )
+        }
+        return
+      }
+
+      window.getAllExtraPackageData(
+        registry,
+        dependencies,
+        results.key,
+        function(data) {
+          data.forEach(function(dep) {
+            var homepage =
+              dep.repository_url.indexOf('.git') === -1
+                ? data.repository_url
+                : data.homepage
+            addExtraData.call(
+              rows[dep.name],
+              dep.latest_release_number,
+              dep.description,
+              homepage
+            )
+          })
+        }
+      )
+    })
   }
 
   function subHeader(dev, className) {

@@ -1,5 +1,6 @@
 # Package Hub
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/hnnjnbmjanpeoeapjllonejjgoonilal.svg?style=flat-square)](https://chrome.google.com/webstore/detail/package-hub/hnnjnbmjanpeoeapjllonejjgoonilal)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/d/hnnjnbmjanpeoeapjllonejjgoonilal.svg?style=flat-square)](https://chrome.google.com/webstore/detail/package-hub/hnnjnbmjanpeoeapjllonejjgoonilal)
 > An extension for displaying dependencies for different package managers on GitHub
 
 ![](screenshot.png)
@@ -9,7 +10,9 @@
 - [x] Composer.
 - [x] Pip.
 - [x] Cargo.
-- [ ] Gem
+
+### Usage
+Clicking the extension icon opens a popup where you can provide an API key from libraries.io that you can get from [here](https://libraries.io/api). This API key allows the extension to make bulk requests instead of single ones which improves the experience greatly. Encountering projects with too many dependencies now works correctly. It is a little unpleasant, but getting an API key is worth it.
 
 ### Rationale
 Why build this? We already have [npmhub](https://github.com/npmhub/npmhub)?

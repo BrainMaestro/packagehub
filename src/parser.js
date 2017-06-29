@@ -52,6 +52,6 @@
   window.parse = parse
   window.parser = {
     json: json,
-    toml: toml,
+    toml: toml
   }
 })()
