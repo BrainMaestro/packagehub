@@ -89,8 +89,8 @@
           data.forEach(function(dep) {
             var homepage =
               dep.repository_url.indexOf('.git') === -1
-                ? data.repository_url
-                : data.homepage
+                ? dep.repository_url
+                : dep.homepage
             addExtraData.call(
               rows[dep.name],
               dep.latest_release_number,
