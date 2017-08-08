@@ -1,6 +1,9 @@
 # Package Hub
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/hnnjnbmjanpeoeapjllonejjgoonilal.svg?style=flat-square)](https://chrome.google.com/webstore/detail/package-hub/hnnjnbmjanpeoeapjllonejjgoonilal)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/d/hnnjnbmjanpeoeapjllonejjgoonilal.svg?style=flat-square)](https://chrome.google.com/webstore/detail/package-hub/hnnjnbmjanpeoeapjllonejjgoonilal)
+[![Mozilla Add-on](https://img.shields.io/amo/v/package-hub.svg?style=flat-square)](https://addons.mozilla.org/en-US/firefox/addon/package-hub)
+[![Mozilla Add-on](https://img.shields.io/amo/d/package-hub.svg?style=flat-square)](https://addons.mozilla.org/en-US/firefox/addon/package-hub)
+
 > An extension for displaying dependencies for different package managers on GitHub
 
 ![](screenshot.png)
