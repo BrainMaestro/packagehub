@@ -1,17 +1,5 @@
 ;(function() {
   var tableHeaders = ['Name', 'Version', 'Latest', 'Description']
-  var open =
-    '\
-    <svg class="octicon octicon-chevron-down" viewBox="0 0 10 16" version="1.1" width="15" height="26" aria-hidden="true">\
-      <path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z">\
-      </path>\
-    </svg>'
-  var closed =
-    '\
-    <svg class="octicon octicon-chevron-right" viewBox="0 0 8 16" version="1.1" width="12" height="24" aria-hidden="true">\
-      <path fill-rule="evenodd" d="M7.5 8l-5 5L1 11.5 4.75 8 1 4.5 2.5 3z">\
-      </path>\
-    </svg>'
 
   function display(deps, devDeps, config) {
     var readme = document.querySelector('.markdown-body.entry-content')
@@ -107,6 +95,7 @@
     var row = document.createElement('tr')
     var td = document.createElement('td')
     var header = document.createElement('strong')
+    var icons = getIcons()
 
     header.textContent = dev
       ? 'Development Dependencies'
@@ -117,7 +106,7 @@
     td.appendChild(header)
     var icon = document.createElement('div')
     icon.style.float = 'right'
-    icon.innerHTML = open
+    icon.appendChild(icons.open)
     td.appendChild(icon)
     row.appendChild(td)
 
@@ -129,7 +118,8 @@
         toggle(rows[i])
       }
       var icon = td.getElementsByTagName('div')[0]
-      icon.innerHTML = icon.innerHTML === open ? closed : open
+      var removedChild = icon.removeChild(icon.children[0])
+      icon.appendChild(removedChild === icons.open ? icons.closed : icons.open)
     }
   }
 
@@ -169,6 +159,44 @@
 
   function toggle(element) {
     element.style.display = element.style.display === 'none' ? '' : 'none'
+  }
+
+  function getIcons() {
+    var open = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+    open.setAttribute('class', 'octicon octicon-chevron-down')
+    open.setAttribute('viewBox', '0 0 10 16')
+    open.setAttribute('version', '1.1')
+    open.setAttribute('width', '15')
+    open.setAttribute('height', '26')
+    open.setAttribute('aria-hidden', 'true')
+    open.setAttributeNS(
+      'http://www.w3.org/2000/xmlns/',
+      'xmlns:xlink',
+      'http://www.w3.org/1999/xlink'
+    )
+    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+    path.setAttribute('fill-rule', 'evenodd')
+    path.setAttribute('d', 'M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z')
+    open.appendChild(path)
+
+    var closed = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+    closed.setAttribute('class', 'octicon octicon-chevron-right')
+    closed.setAttribute('viewBox', '0 0 8 16')
+    closed.setAttribute('version', '1.1')
+    closed.setAttribute('width', '12')
+    closed.setAttribute('height', '24')
+    closed.setAttribute('aria-hidden', 'true')
+    closed.setAttributeNS(
+      'http://www.w3.org/2000/xmlns/',
+      'xmlns:xlink',
+      'http://www.w3.org/1999/xlink'
+    )
+    path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+    path.setAttribute('fill-rule', 'evenodd')
+    path.setAttribute('d', 'M7.5 8l-5 5L1 11.5 4.75 8 1 4.5 2.5 3z')
+    closed.appendChild(path)
+
+    return { open: open, closed: closed }
   }
 
   window.display = display

@@ -3,7 +3,9 @@
     getPackageData(url, getDependencies)
 
     function getDependencies(text) {
-      var packageData = config.parse(text)
+      var packageData = config.parse(
+        text.replace(/\s+/g, '').replace(/}\w+$/, '}')
+      )
 
       var deps = filter(packageData[config.keys[0]], config.filter)
       var devDeps = filter(packageData[config.keys[1]], config.filter)
