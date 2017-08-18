@@ -1,10 +1,12 @@
 ;(function() {
+  var extraneous = ['Copy lines', 'Copy permalink', 'Open new issue']
+
   function parse(url, config, callback) {
     getPackageData(url, getDependencies)
 
     function getDependencies(text) {
       var packageData = config.parse(
-        text.replace(/\s+/g, '').replace(/}\w+$/, '}')
+        extraneous.reduce((acc, string) => acc.replace(string, ''), text)
       )
 
       var deps = filter(packageData[config.keys[0]], config.filter)
