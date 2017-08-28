@@ -1,6 +1,6 @@
 {
   "name": "Package Hub",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "manifest_version": 2,
   "description": "Display dependencies for many package managers on GitHub",
   "author": "Ezinwa Okpoechi",
@@ -23,5 +23,8 @@
     "default_icon": "icon.png",
     "default_title": "Package Hub",
     "default_popup": "popup/set_api_key.html"
+  },
+  "icons": {
+    "128": "icon.png"
   }
 }
