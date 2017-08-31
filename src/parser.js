@@ -1,13 +1,9 @@
 ;(function() {
-  var extraneous = ['Copy lines', 'Copy permalink', 'Open new issue']
-
   function parse(url, config, callback) {
     getPackageData(url, getDependencies)
 
     function getDependencies(text) {
-      var packageData = config.parse(
-        extraneous.reduce((acc, string) => acc.replace(string, ''), text)
-      )
+      var packageData = config.parse(text)
 
       var deps = filter(packageData[config.keys[0]], config.filter)
       var devDeps = filter(packageData[config.keys[1]], config.filter)
@@ -24,7 +20,7 @@
     function listener() {
       var parser = new DOMParser()
       var doc = parser.parseFromString(this.responseText, 'text/html')
-      var blob = doc.querySelector('.blob-wrapper')
+      var blob = doc.querySelector('.blob-wrapper > table')
 
       callback(blob.textContent)
     }

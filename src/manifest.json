@@ -1,6 +1,6 @@
 {
   "name": "Package Hub",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "manifest_version": 2,
   "description": "Display dependencies for many package managers on GitHub",
   "author": "Ezinwa Okpoechi",
