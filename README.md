@@ -27,11 +27,10 @@ Also, to make it more fun, I decided to accomplish this without any fancy librar
 ## Related
 * [npmhub](https://github.com/npmhub/npmhub) - inspired the idea for this extension.
 
-## Installation
-
-[![Install from chrome web store](https://developer.chrome.com/webstore/images/ChromeWebStore_Badge_v2_340x96.png)](https://chrome.google.com/webstore/detail/package-hub/hnnjnbmjanpeoeapjllonejjgoonilal)
-
-Install extension from [Chrome Web Store](https://chrome.google.com/webstore/detail/package-hub/hnnjnbmjanpeoeapjllonejjgoonilal)
+## Install
+- [**Firefox** Add-on](https://addons.mozilla.org/en-US/firefox/addon/package-hub)
+- [**Chrome** Extension](https://chrome.google.com/webstore/detail/package-hub/hnnjnbmjanpeoeapjllonejjgoonilal)
+- **Opera** extension: Use [this Opera extension](https://addons.opera.com/en/extensions/details/download-chrome-extension-9/) to install the Chrome version.
 
 ## Development
 
